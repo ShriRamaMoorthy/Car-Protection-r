@@ -67,7 +67,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'car_protection.wsgi.application'
+WSGI_APPLICATION = 'car_protection.wsgi.app'
 
 
 # Database
