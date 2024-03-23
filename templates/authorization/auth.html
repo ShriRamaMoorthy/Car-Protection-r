@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Object and Gender Detection</title>
+    <script>
+        function redirectToAuthorization() {
+          window.location.href = "/drowsy";
+        }
+    </script>
+</head>
+<body>
+    <h1>Object and Gender Detection</h1>
+    <div>
+        <img src="{% url 'monitor' %}" alt="Camera Feed" />
+    </div>
+    <button onclick="redirectToAuthorization()">Redirect Button</button>
+</body>
+</html>
