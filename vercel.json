@@ -9,7 +9,7 @@
       },
       {
         "src": "car_protection/wsgi.py",
-        "use": "@vercel/python3",
+        "use": "@vercel/python",
         "config": { "maxLambdaSize": "15mb" }
       }
     ],
