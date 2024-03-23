@@ -1,4 +1,4 @@
-alias pip=pip3
+python --version
 echo "Build"
 pip3 install -r requirements.txt
 pip3 install opencv-python
