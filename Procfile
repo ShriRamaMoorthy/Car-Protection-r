@@ -1,0 +1,1 @@
+web: gunicorn car_protection.wsgi --log-file -
