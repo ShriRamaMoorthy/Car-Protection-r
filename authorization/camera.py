@@ -6,16 +6,10 @@ from sklearn.preprocessing import LabelEncoder
 import pickle
 from keras_facenet import FaceNet
 import time
-import winsound
 import smtplib
 import ssl
 from email.message import EmailMessage
-import pywhatkit
-import pyautogui
-from pynput.keyboard import Key, Controller
-from django.http import HttpResponseRedirect
 from django.urls import reverse
-import urllib.request  
 import webbrowser 
 
 
@@ -120,8 +114,6 @@ class VideoCamera(object):
         # Implement your beep sound function here
         print("Beep sound triggered")
         self.send_notifications()
-        for _ in range(5):  # Repeat the beep sound 5 times
-            winsound.Beep(1000, 500)  # Beep at 1000 Hz for 500 milliseconds
 
     def send_notifications(self):
         # Define email sender and receiver
