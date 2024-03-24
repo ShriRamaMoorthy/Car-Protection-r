@@ -18,7 +18,7 @@ class VideoCamera(object):
         # Using OpenCV to capture from device 0. If you have trouble capturing
         # from a webcam, comment the line below out and use a video file
         # instead.
-        for i in range(4):  # Try up to index 3
+        for i in range(-1,4):  # Try up to index 3
             video = cv2.VideoCapture(i)
             if video.isOpened():
                 print(f"Successfully opened camera with index {i}")
