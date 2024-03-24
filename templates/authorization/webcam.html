@@ -1,0 +1,51 @@
+<!-- webcam.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webcam Access</title>
+</head>
+<body>
+    <h1>Webcam Access Example</h1>
+    <video id="webcam" width="640" height="480" autoplay></video>
+    <canvas id="canvas" width="640" height="480"></canvas>
+
+    <script>
+        const video = document.getElementById('webcam');
+        const canvas = document.getElementById('canvas');
+        const context = canvas.getContext('2d');
+
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                video.srcObject = stream;
+            })
+            .catch(err => {
+                console.error('Error accessing webcam:', err);
+            });
+
+        function captureFrame() {
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            const imageData = canvas.toDataURL('image/jpeg');
+
+            // Send imageData to Django server using AJAX
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', '/process_frame', true); // Replace '/process_frame' with your Django endpoint URL
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        console.log('Frame processed successfully:', xhr.responseText);
+                    } else {
+                        console.error('Error processing frame:', xhr.status);
+                    }
+                }
+            };
+            xhr.send(JSON.stringify({ image_data: imageData }));
+        }
+
+        // Call captureFrame() periodically to capture webcam frames
+        setInterval(captureFrame, 1000); // Adjust the interval as needed
+    </script>
+</body>
+</html>
