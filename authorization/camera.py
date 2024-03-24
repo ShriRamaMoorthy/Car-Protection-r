@@ -18,6 +18,7 @@ class VideoCamera(object):
         # Using OpenCV to capture from device 0. If you have trouble capturing
         # from a webcam, comment the line below out and use a video file
         # instead.
+        '''
         for i in range(-1,4):  # Try up to index 3
             video = cv2.VideoCapture(i)
             if video.isOpened():
@@ -25,6 +26,19 @@ class VideoCamera(object):
                 break
             else:
                 print(f"Failed to open camera with index {i}")
+        '''
+        camera_index = os.getenv('CAMERA_INDEX')
+        if camera_index is not None:
+            try:
+                camera_index = int(camera_index)
+                self.video = cv2.VideoCapture(camera_index)
+                print(f"Successfully opened camera with index {camera_index}")
+            except ValueError:
+                print("Invalid camera index specified in environment variable.")
+        else:
+            print("Camera index not specified in environment variable.")
+
+
         # If you decide to use video.mp4, you must have this file in the folder
         # as the main.py.
         # self.video = cv2.VideoCapture('video.mp4')
